@@ -1,0 +1,16 @@
+<div class="upload-container">
+    <!-- Input para capturar da câmera ou escolher da galeria -->
+    <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*" capture="environment">
+
+    <!-- Pré-visualização -->
+    <div *ngIf="previewUrl" class="preview-container">
+        <img *ngIf="selectedFile && selectedFile.type.startsWith('image/')" [src]="previewUrl" alt="Prévia da imagem">
+        <video *ngIf="selectedFile && selectedFile.type.startsWith('video/')" [src]="previewUrl" controls></video>
+    </div>
+
+    <!-- Botão de envio -->
+    <button (click)="upload()" [disabled]="!selectedFile">Enviar</button>
+</div>
+
+<!-- Mensagem de sucesso ou erro -->
+<p *ngIf="message">{{ message }}</p>
