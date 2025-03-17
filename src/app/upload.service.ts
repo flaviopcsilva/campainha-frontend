@@ -10,9 +10,14 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File): Observable<any> {
+  uploadFile(file: File | null, name: string): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
+    if (file) {
+      formData.append('file', file); // Só adiciona se houver arquivo
+    }
+    if (name) {
+      formData.append('name', name); // Adiciona o nome opcionalmente
+    }
     return this.http.post(this.apiUrl, formData);
   }
 }

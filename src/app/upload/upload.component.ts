@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../upload.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   standalone: true
 })
 
@@ -14,6 +15,7 @@ export class UploadComponent {
   selectedFile!: File | null;
   previewUrl: string | null = null;
   message = '';
+  userName = ''; // Campo para armazenar o nome opcional
 
   constructor(private uploadService: UploadService) { }
 
@@ -35,12 +37,12 @@ export class UploadComponent {
   }
 
   upload() {
-    if (!this.selectedFile) {
-      this.message = 'Por favor, selecione um arquivo!';
-      return;
-    }
+    // if (!this.selectedFile) {
+    //   this.message = 'Por favor, selecione um arquivo!';
+    //   return;
+    // }
 
-    this.uploadService.uploadFile(this.selectedFile).subscribe({
+    this.uploadService.uploadFile(this.selectedFile, this.userName).subscribe({
       next: (response) => {
         this.message = 'Arquivo enviado com sucesso!';
         console.log(response);
