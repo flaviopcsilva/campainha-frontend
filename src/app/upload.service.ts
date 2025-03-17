@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadService {
-  private apiUrl = 'https://deep-panda-flaviocardodo-563c39bb.koyeb.app/upload';
+  private apiUrl = 'https://campainha-api.onrender.com/upload';
 
   constructor(private http: HttpClient) { }
 
