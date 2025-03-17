@@ -9,8 +9,7 @@
 
         <!-- Botão estilizado para upload -->
         <label for="file-upload" class="upload-label">Escolher Foto/Vídeo (Opcional)</label>
-        <input id="file-upload" type="file" (change)="onFileSelected($event)" accept="image/*,video/*"
-            capture="environment">
+        <input id="file-upload" type="file" (change)="onFileSelected($event)" accept="image/*,video/*" capture>
 
         <!-- Pré-visualização -->
         <div *ngIf="previewUrl" class="preview-container">
