@@ -32,13 +32,16 @@ h1 {
 
 /* Caixa de upload */
 .upload-container {
+    display: flex;
+    flex-direction: column;
     background: rgb(255, 255, 255);
+    align-items: center;
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
+    width: 70%;
+    max-width: 300px;
 }
 
 /* Título dentro do container */
@@ -69,7 +72,7 @@ input[type="file"] {
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 16px;
     text-align: center;
     transition: background 0.3s ease;
@@ -101,15 +104,29 @@ input[type="file"] {
 
 /* Botão de envio */
 button {
-    width: 100%;
-    padding: 12px;
-    background: #28a745;
-    color: white;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #ffcc00;
+    /* Amarelo campainha */
     border: none;
-    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito de clique */
+button:active {
+    transform: scale(0.9);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
@@ -127,6 +144,6 @@ button:hover {
 @media (max-width: 480px) {
     .upload-container {
         width: 95%;
-        padding: 15px;
+        padding: 10px;
     }
 }

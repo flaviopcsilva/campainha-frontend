@@ -46,6 +46,7 @@ export class UploadComponent {
             latitude: position.coords.latitude.toString(),
             longitude: position.coords.longitude.toString()
           };
+          this.upload()
         },
         (error) => {
           console.error('Erro ao obter localização', error);
@@ -62,12 +63,12 @@ export class UploadComponent {
     //   this.message = 'Por favor, selecione um arquivo!';
     //   return;
     // }
-
+    console.log(this.userLocation);
     if (!this.userLocation) {
       this.message = 'Localização não obtida. Por favor, ative o GPS.';
       return;
     }
-    console.log(this.userLocation);
+
 
 
     this.uploadService.uploadFile(this.selectedFile, this.userName, this.userLocation.latitude, this.userLocation.longitude).subscribe({
