@@ -75,10 +75,23 @@ export class UploadComponent {
       next: (response) => {
         this.message = 'Arquivo enviado com sucesso!';
         console.log(response);
+        // Limpar os campos após o envio
+        this.selectedFile = null;
+        this.previewUrl = null;
+        this.userName = '';
+
+        // Fazer a mensagem desaparecer após 10 segundos
+        setTimeout(() => {
+          this.message = '';
+        }, 5000);
       },
       error: (error) => {
         this.message = 'Erro ao enviar o arquivo!';
         console.error(error);
+        // Fazer a mensagem desaparecer após 10 segundos
+        setTimeout(() => {
+          this.message = '';
+        }, 5000);
       }
     });
   }
