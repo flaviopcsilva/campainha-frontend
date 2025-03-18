@@ -16,6 +16,7 @@ export class UploadComponent {
   previewUrl: string | null = null;
   message = '';
   userName = ''; // Campo para armazenar o nome opcional
+  userLocation: { latitude: string; longitude: string } | null = null;
 
   constructor(private uploadService: UploadService) { }
 
@@ -36,13 +37,40 @@ export class UploadComponent {
     reader.readAsDataURL(file);
   }
 
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.userLocation = {
+            latitude: position.coords.latitude.toString(),
+            longitude: position.coords.longitude.toString()
+          };
+        },
+        (error) => {
+          console.error('Erro ao obter localização', error);
+          this.message = 'Não foi possível obter a localização.';
+        }
+      );
+    } else {
+      this.message = 'Geolocalização não suportada pelo navegador.';
+    }
+  }
+
   upload() {
     // if (!this.selectedFile) {
     //   this.message = 'Por favor, selecione um arquivo!';
     //   return;
     // }
 
-    this.uploadService.uploadFile(this.selectedFile, this.userName).subscribe({
+    if (!this.userLocation) {
+      this.message = 'Localização não obtida. Por favor, ative o GPS.';
+      return;
+    }
+    console.log(this.userLocation);
+
+
+    this.uploadService.uploadFile(this.selectedFile, this.userName, this.userLocation.latitude, this.userLocation.longitude).subscribe({
       next: (response) => {
         this.message = 'Arquivo enviado com sucesso!';
         console.log(response);

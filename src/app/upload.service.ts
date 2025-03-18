@@ -10,7 +10,7 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File | null, name: string): Observable<any> {
+  uploadFile(file: File | null, name: string, latitude: string, longitude: string): Observable<any> {
     const formData = new FormData();
     if (file) {
       formData.append('file', file); // Só adiciona se houver arquivo
@@ -18,6 +18,10 @@ export class UploadService {
     if (name) {
       formData.append('name', name); // Adiciona o nome opcionalmente
     }
+
+    formData.append('latitude', latitude);
+    formData.append('longitude', longitude);
+
     return this.http.post(this.apiUrl, formData);
   }
 }
